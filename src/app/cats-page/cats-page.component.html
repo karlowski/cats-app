@@ -1,0 +1,31 @@
+<form [formGroup]="form" class="form">
+  <mat-card>
+    <mat-form-field class="form__item">
+      <mat-label>Select breed</mat-label>
+      <mat-select formControlName="breed" [disabled]="form.controls['allCatsShown'].value">
+        <mat-option *ngFor="let breed of breeds" [value]="breed.id">
+          {{breed.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="form__item">
+      <mat-label>Select shown cats</mat-label>
+      <mat-select formControlName="amount">
+        <mat-option *ngFor="let catsAmount of catsPerPage" [value]="catsAmount">
+          {{catsAmount}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-checkbox class="form__item" formControlName="allCatsShown">Show All Cats</mat-checkbox>
+  </mat-card>
+</form>
+
+<div class="cats">
+  <mat-card *ngFor="let cat of cats$ | async" class="cats__card">
+    <div class="cats__image-wrapper">
+      <img class="cats__image" [src]="cat.url" alt="cat">
+    </div>
+  </mat-card>
+</div>
